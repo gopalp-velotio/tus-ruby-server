@@ -21,14 +21,10 @@ default: &default
 
 development:
   <<: *default
-  database: tus_api_development
-
-  # The specified database role being used to connect to PostgreSQL.
-  # To create additional roles in PostgreSQL see `$ createuser --help`.
-  # When left blank, PostgreSQL will use the default role. This is
-  # the same name as the operating system user running Rails.
-  #username: tus_api
-
+  database: tus_server_development
+  username: postgres
+  password: postgres
+  host: localhost
   # The password associated with the PostgreSQL role (username).
   #password:
 
@@ -55,7 +51,10 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: tus_api_test
+  database: tus_server_test
+  username: postgres
+  password: postgres
+  host: localhost
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -79,6 +78,6 @@ test:
 #
 production:
   <<: *default
-  database: tus_api_production
-  username: tus_api
-  password: <%= ENV["TUS_API_DATABASE_PASSWORD"] %>
+  database: tus_server_production
+  username: tus_server
+  password: <%= ENV["TUS_SERVER_DATABASE_PASSWORD"] %>

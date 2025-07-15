@@ -5,6 +5,14 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Mount tus server for resumable file uploads
+  mount Tus::Server => "/files"
+
+  # API endpoint for listing uploaded files
+  namespace :api do
+    get "files", to: "uploads#list_files"
+  end
+
+  # Root endpoint redirects to health check
+  root "rails/health#show"
 end
